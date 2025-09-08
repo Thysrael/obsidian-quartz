@@ -1,6 +1,6 @@
 # 大小
 
-如果设模型的参数量为$N$ ，而序列的长度为$L$ ，则其所对应 KV Cache 的大小是$O(NL)$ 级别的。这个说法其实非常没有道理，因为 KV Cache 的大小其实应该是$L \times Layer \times KV\_Head \times Dim \times DType$ ，但是考虑到每个模型的层数、头数都不同，所以准确计算并没有太大的意义。反而不如用参数量这个与层数、头数都有关的量来近似估算。
+如果设模型的参数量为 $N$ ，而序列的长度为 $L$ ，则其所对应 KV Cache 的大小是 $O(NL)$ 级别的。这个说法其实非常没有道理，因为 KV Cache 的大小其实应该是 $L \times Layer \times KV\_Head \times Dim \times DType$ ，但是考虑到每个模型的层数、头数都不同，所以准确计算并没有太大的意义。反而不如用参数量这个与层数、头数都有关的量来近似估算。
 
 从效果来看，如果采用 float32 ，那么 1B 的模型，序列长度为 1 的时候，KV Cache 的长度为 1M 。比如说 175B 的 Chatgpt3 在序列长度为 4K 的时候， KV Cache 的大小是 604GB 。
 

@@ -39,7 +39,7 @@ Enter passphrase (empty for no passphrase):
 
 这里提到的 passphrase 是为了保护私钥的，如果有人窃取了你的私钥文件（黑掉了个人电脑），那么它就完全掌握通信过程了。passphrase 就是为了缓解这一情况，当存在 passphrase 的时候，使用私钥前必须输入正确的 passphrase 。不过我们一般都为了方便，不设置 passphrase 。
 
-在公钥生成好后，需要将公钥附加到服务器用户目录下的$HOME/.ssh/authorized_keys` 文件中，这个动作可以用如下命令完成
+在公钥生成好后，需要将公钥附加到服务器用户目录下的 $HOME/.ssh/authorized_keys` 文件中，这个动作可以用如下命令完成
 
 ``` shell
 ssh-copy-id username@remote_host

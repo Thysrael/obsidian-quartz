@@ -1,6 +1,6 @@
 # K-Means
 
-K-Means 是一种无监督聚类学习方法。也就是给定一堆数据，将他们聚成$k$ 个不同的 cluster ，cluster 内的数据具有相似性。
+K-Means 是一种无监督聚类学习方法。也就是给定一堆数据，将他们聚成 $k$ 个不同的 cluster ，cluster 内的数据具有相似性。
 
 # NP
 
@@ -22,6 +22,6 @@ K-Means 是一个 NP 问题，但是我们有一个很好的 [[Approximation Alg
 
 # KNN
 
-KNN (K Nearest Neighbors) 是在 K-Means 之后执行的一个算法。它说的是对于新来的数据点，找到$k$ 个与之最相邻的点，然后根据这些点判断新的数据点属于哪个 cluster 。
+KNN (K Nearest Neighbors) 是在 K-Means 之后执行的一个算法。它说的是对于新来的数据点，找到 $k$ 个与之最相邻的点，然后根据这些点判断新的数据点属于哪个 cluster 。
 
 每个数据都需要遍历整个数据集，才能判断它到底属于哪个 cluster ，如果数据集的大小为 $N$ ，则时间复杂度为 $O(N)$ 。所以当数据集很大时，KNN 算法就会变慢。这个时候可以使用 [[ANNS]] 来完成近似加速。

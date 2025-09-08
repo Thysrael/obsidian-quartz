@@ -36,7 +36,7 @@ all:
 
 - 赋值语法：shellscript 不允许等号两侧有空格，makfile 允许。
 - 赋值符号：shellscript 是没有 `?=, :=` 的，只有 `=, +=` 。
-- 变量使用：shellscript 使用变量为${VAR},$VAR` ，而$(Command)` 表示对于 `Command` 求值并引用。
+- 变量使用：shellscript 使用变量为 ${VAR},$VAR` ，而 $(Command)` 表示对于 `Command` 求值并引用。
 
 ## 赋值
 
