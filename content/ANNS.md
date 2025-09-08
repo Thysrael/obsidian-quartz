@@ -33,4 +33,4 @@ LSH(Locality-Sensitive Hashing) 通过哈希函数将相似数据映射到相同
 
 HNSW（Hierarchical Navigable Small World）是当前最优算法之一，支持高召回率与低延迟。
 
-搜索\$O(log N)\$，内存占用较高。
+搜索 $O(log N)$，内存占用较高。
