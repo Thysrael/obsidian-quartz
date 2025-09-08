@@ -1,0 +1,3 @@
+- 硬件模拟器：[[Qemu]]
+- CPU Benchmark: [[SPEC CPU]]
+- 加密库：[[OpenSSL]]

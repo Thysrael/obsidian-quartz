@@ -1,0 +1,2 @@
+- 缓存抖动：[[Cache Thrash]]
+- 缓存一致性：[[Cache Coherency]]

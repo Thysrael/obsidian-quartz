@@ -1,0 +1,73 @@
+# 交叉编译
+
+其实交叉编译是最反映构建流程的，因为它并不能利用宿主机原始的构建环境。
+
+首先我们需要编写 `my_module.c` 文件，这个文件可以引用的头文件和内核源码可以引用的头文件相同。
+
+然后在 `Makefile` 中设置 `obj-m` ，增加与 `my_module.c` 同名的 `my_module.o` ，如下所示：
+
+``` makefile
+obj-m += my_module.o
+```
+
+然后就可以进行构建了，在构建的时候需要指定两个路径，一个是内核目录 `KDIR` ，另一个是模块所在源码路径 `M` 。
+
+至于这个内核目录到底应该是什么，其实很好理解， **内核模块是依赖于特定的内核的** ，所以内核目录就应该我们需要加入模块的那个内核的源码目录，如：
+
+``` makefile
+KDIR := <linux_path>
+```
+
+而如果只是在本机构建模块，则可以这样写，因为这个目录下存放着本机的源码：
+
+``` makefile
+KDIR ?= "/lib/modules/$(shell uname -r)/build"
+```
+
+最终构建命令和清除命令如下：
+
+``` makefile
+all:
+    make -C$(KDIR) M=$(PWD) modules
+
+clean:
+    make -C$(KDIR) M=$(PWD) clean
+```
+
+# Command
+
+## 插入模块
+
+我们可以使用如下命令插入模块：
+
+``` shell
+insmode <module_path>
+```
+
+但是这种方式并不会注意到模块的依赖项，并确保正确顺序地加载所需的所有模块。而 `modprobe` 则具有这个特性，它还会处理一些模块加载的细节，如符号解析、模块参数处理等。但是对象就变成 `module-name` 了：
+
+``` shell
+modprobe <module_name>
+```
+
+## 删除模块
+
+使用如下命令进行模块的删除：
+
+``` shell
+rmmod <module_path>
+```
+
+当然也可以用 `modprobe` ，如下所示：
+
+``` shell
+modprobe -r <module_name>
+```
+
+## 列出模块
+
+使用如下命令：
+
+``` shell
+lsmod
+```

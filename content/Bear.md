@@ -1,0 +1,10 @@
+# Kernel Module
+
+需要在 `bear -- make` 前先执行 `make clean` 才可以生成不为空的 `commpile_commands.json` 文件。
+
+如果是交叉编译到 A64 上，似乎因为 `clangd` 的 bug ，需要手动忽略一些编译选项。可以在项目根目录下创建 `.clangd` 文件来忽略一些报错的编译选项，如下所示：
+
+``` conf
+CompileFlags:
+  Remove: [-femit-struct-debug-baseonly, -fconserve-stack, -fno-allow-store-data-races, -mabi=lp64]
+```

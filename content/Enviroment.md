@@ -1,0 +1,24 @@
+这里记录着工作环境的工具：
+
+- 编辑器：[[Emacs]]
+- 截屏软件：Flameshot
+- 录屏软件：Peek
+- 远端仓库：[[Github]]
+- 输入法框架：[[Fcitx]]
+- 输入法：[[Rime]]
+- 字体配置：[[FontConfig]]
+- 磁盘分区工具：[[GParted]]
+- 静态网站生成器：[[Hexo]]
+- Linux 发行版：[[ArchLinux]]
+- 构建工具：[[Make]]
+- 网络协议分析工具：[[WireShark]]
+- 虚拟机：[[VMWare]]
+- 数据图绘制工具：[[GNUPlot]]
+- 文献管理工具：[[Zotero]]
+- 家目录管理：[[XDG]]
+- Shell: [[ZSH]]
+- LSP Server: [[PyRight]]
+- 终端模拟器: [[Kitty]], [[Konsole]]
+- 办公工具：[[Office]]
+- 图形协议：[[Wayland]], [[X11]]
+- VPN: [[Clash]]

@@ -1,0 +1,93 @@
+Linux 挂载的本质是让让内核解析设备文件里的文件系统的过程。
+
+# 基础挂载命令
+
+`mount` 命令用于将外存文件系统挂载到 OS 维护的前端文件系统上。其命令格式为
+
+``` shell
+mount -t <fs_type> <device> <mount point>
+```
+
+# 显示挂载情况
+
+如果直接输入 `mount` 命令，那么就会显示 OS 当前的挂载情况，但是输出是线性的，不太好看。所以可以使用如下命令获得挂载点的树形显示
+
+``` shell
+findmnt
+```
+
+# 多个挂载点
+
+同一文件系统可以被挂载到多个 mount point，这被称为"bind mount"（多个路径是 bind 在一起的）：
+
+``` shell
+mount --bind <old_directory> <new_directory>
+```
+
+其实这并不难理解，它就像是文件系统层面的一个 symbol link。
+
+# 共用挂载点
+
+反过来，不同的文件系统也可以共用同一个 mount point，新挂载的文件系统会覆盖掉这个位置之前的文件系统。但如果使用"union mount"的形式，最后呈现的目录结构则是新旧文件系统 merge 后的结果：
+
+``` shell
+mount --union /dev/sdb /mnt
+```
+
+# 卸载
+
+挂载的时候需要同时指定块设备和挂载点，而卸载的时候只需指定其中一个元素即可：
+
+``` shell
+umount <directory>
+umount <device>
+```
+
+# 偏移量
+
+一个磁盘镜像文件上可能存在多个分区，如果这时直接挂载设备，那么就会导致报错，如下所示：
+
+``` text
+$ sudo mount ./gem5/extern/disks/x86-ubuntu.img /mnt 
+mount: /mnt: fsconfig system call failed: Can't find a SQUASHFS superblock on loop0.
+       dmesg(1) may have more information after failed mount system call.
+```
+
+这里的意思是说在 `loop0` 上找不到超级块，这是因为虽然看似我们挂载的是磁盘镜像文件 `./gem5/extern/disks/x86-ubuntu.img` ，但是实际上这个磁盘镜像文件并不能被挂载，只有设备文件才能被挂载，所以 `mount` 指令隐式地增加了这个步骤：
+
+``` shell
+sudo losetup /dev/loop0 ./gem5/extern/disks/x86-ubuntu.img
+```
+
+也就是将磁盘镜像文件和回环设备 `loop0` 联系在了一起。当然在结束这一切后，还会有一个“取消联系”的操作
+
+``` shell
+sudo losetup -d /dev/loop0
+```
+
+另外说一嘴，回环设备（Loop device）的最大作用就是允许用户将普通文件当作块设备进行操作，也就是它的本来用法。
+
+正因我们将 `loop0` 和 `x86-ubuntu.img` 联系在一起，所以报错中会显式的指出 `loop0` 没有超级块，这是因为超级块是文件系统的头部，而对于有分区的磁盘镜像，它的头部是分区表。
+
+在理解这个无关紧要的报错后，我们意识到必须找到具体的分区并挂载。所以我们用 [[FDisk]] 命令去查看分区情况，会得到如下内容
+
+``` shell
+> sudo fdisk -l ./gem5/extern/disks/x86-ubuntu.img 
+Disk ./gem5/extern/disks/x86-ubuntu.img：2 GiB，2147483648 字节，4194304 个扇区
+单元：扇区 / 1 * 512 = 512 字节
+扇区大小(逻辑/物理)：512 字节 / 512 字节
+I/O 大小(最小/最佳)：512 字节 / 512 字节
+磁盘标签类型：dos
+磁盘标识符：0xd0c30ca2
+
+设备                                启动  起点    末尾    扇区 大小 Id 类型
+./gem5/extern/disks/x86-ubuntu.img1 *     2048 4192255 4190208   2G 83 Linux
+```
+
+注意到这个磁盘镜像中只有一个分区，它的起点是 2048 ，所以我们可以在挂载的时候指定偏移量（也就是 2048 \* 512），进而完成正确地挂载：
+
+``` shell
+sudo mount -o loop,offset=$((2048*512)) ./gem5/extern/disks/x86-ubuntu.img /mnt
+```
+
+其中 `-o` 是指定挂载的参数， `loop` 就是回环设备的意思，而 `offset` 指定偏移量。

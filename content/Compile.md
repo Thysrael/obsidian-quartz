@@ -1,0 +1,5 @@
+- 编译器：[[GCC]]
+- 即时编译技术：[[JIT]]
+- LISP: [[Lisp]]
+- 类型系统：[[Type System]]
+- 流处理：[[Stream]]

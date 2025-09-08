@@ -1,0 +1,1 @@
+Btrfs（B-tree File System）是一个现代的文件系统，旨在提供高效的数据管理和灵活性。它由 Oracle 开发，目的是取代老旧的 ext 系列文件系统（如 ext2、ext3 和ext4）。
