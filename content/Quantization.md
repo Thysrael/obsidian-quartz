@@ -22,10 +22,10 @@
 
 训练后量化（Post-Training Quantization, PTQ）：无需重新训练模型，直接对预训练模型量化。
 
-- ​​RTN​： Round-to-Nearest, 最为直观的量化方法，最简单的四舍五入量化，直接对权重取整。
+- RTN： Round-to-Nearest, 最为直观的量化方法，最简单的四舍五入量化，直接对权重取整。
 - AWQ: Activation-aware Weight Quantization, 通过分析激活值（activation）的分布动态调整量化策略，对影响较大的权重保持高精度，而对于影响较低的权重使用低精度。
 - GPTQ: Gradient-based Post-Training Quantization, 基于梯度的逐层量化
 
 ## QAT
 
-量化感知训练（Quantization-Aware Training, QAT）​：在训练过程中模拟量化误差，提升最终量化精度
+量化感知训练（Quantization-Aware Training, QAT）：在训练过程中模拟量化误差，提升最终量化精度

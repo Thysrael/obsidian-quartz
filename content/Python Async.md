@@ -162,7 +162,7 @@ asyncio.run(main())
 
 常常有一种说法是，python 是一种单线程语言。但是这句话并不是那么显然的，因为 python 是有 `threading` 模块的。
 
-应该这么说，“python 是一种单线程语言”的来源是 Global Interpreter Lock(GIL) ，它是 CPython 解释器的全局锁，确保同一时刻仅有一个线程执行 Python 字节码。其设计初衷是保护内存管理​（如引用计数）的线程安全。
+应该这么说，“python 是一种单线程语言”的来源是 Global Interpreter Lock(GIL) ，它是 CPython 解释器的全局锁，确保同一时刻仅有一个线程执行 Python 字节码。其设计初衷是保护内存管理（如引用计数）的线程安全。
 
 所以更正确的版本是“ **Python 是无法并行执行的** ”。如果希望并行执行，那么用 C 扩展处理关键代码段，要么换用 Jython 或 IronPython（无 GIL）。
 

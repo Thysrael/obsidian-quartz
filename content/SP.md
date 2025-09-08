@@ -36,6 +36,6 @@ Context Parallelism 与 Sequence Parrallelism 并没有区别，只不过现在 
 
 ![](img/clipboard-20250619T111409.png)
 
-SP 的核心是将张量并行（Tensor Parallelism, TP）无法覆盖的模块（如 LayerNorm、Dropout、全连接层等）通过​​序列维度拆分​​实现并行。但是具体是什么，我并不知道。
+SP 的核心是将张量并行（Tensor Parallelism, TP）无法覆盖的模块（如 LayerNorm、Dropout、全连接层等）通过序列维度拆分实现并行。但是具体是什么，我并不知道。
 
 所以严格意义上来说，这一篇博客的内容应该叫作 CP 。
