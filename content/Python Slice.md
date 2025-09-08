@@ -8,7 +8,7 @@ a[2]    # 2
 a[-3]   # 0
 ```
 
-总的来说就是现在的 index 范围变成了$[-len, len - 1]$ 。
+总的来说就是现在的 index 范围变成了 $[-len, len - 1]$ 。
 
 # Naive Slice
 

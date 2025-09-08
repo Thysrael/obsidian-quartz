@@ -2,4 +2,4 @@
 
 而用来构建 menuconfig 的就是散布在各个文件夹的 `Kconfig` 文件，这个文件使用了一种特殊的 DSL 来描述各种配置项、各个配置项间的依赖关系、他们的组织和显示形式。
 
-DSL 并不难学，这篇[博客](https://mp.weixin.qq.com/s/crXt-6EvKtWg9QX7SM90Sw)写得非常好，可以参考一下。
+DSL 并不难学，这篇 [博客](https://mp.weixin.qq.com/s/crXt-6EvKtWg9QX7SM90Sw) 写得非常好，可以参考一下。

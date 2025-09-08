@@ -1,4 +1,4 @@
-相比 [[XML]] 和 [[Yaml]]，JSON 的语法还真是简单和规范呀。从[这里](https://www.json.org/json-en.html)的自动机图中可以看出。
+相比 [[XML]] 和 [[Yaml]]，JSON 的语法还真是简单和规范呀。从 [这里](https://www.json.org/json-en.html) 的自动机图中可以看出。
 
 JSON 同样支持 **对象，数组，纯值** 三种类型。解析器从 **对象** 开始解析，对象是一组键值对，其中 key 一定是一个有引号的 `string` ，如下所示：
 

@@ -244,7 +244,7 @@ int main() {
 }
 ```
 
-正因如此， `remove` 需要配合 `erase` 完成全部删除功能，更为详细的讨论可以在[这里](https://en.wikipedia.org/wiki/Erase%E2%80%93remove_idiom)找到。
+正因如此， `remove` 需要配合 `erase` 完成全部删除功能，更为详细的讨论可以在 [这里](https://en.wikipedia.org/wiki/Erase%E2%80%93remove_idiom) 找到。
 
 # 总结
 

@@ -2,7 +2,9 @@
 
 FFN 的结构如下：
 
-$FFN(x) = W_2 · Activation(W_1 · x + b_1) + b_2$
+$$
+FFN(x) = W_2 · Activation(W_1 · x + b_1) + b_2
+$$
 
 其中中间维度通常比输入维度更大（例如，在原始 [[Transformer]] 中，输入维度是 512，中间维度是 2048）。扩展维度的作用是让模型在更高维空间中对特征进行组合，形成更复杂的表示。
 
@@ -26,8 +28,12 @@ Attention 机制并没有进行过多的现象变换，它更像是让 embedding
 
 论文将第一次线性变换和后续的非现象变换，视为通过 key 来计算 input 与 value 的相关系数，即：
 
-$C = Activation(K \cdot x)$
+$$
+C = Activation(K \cdot x)
+$$
 
 而第二次线性变换，就是根据相关系数 $C$ 和 $V$ 来计算 input ，即：
 
-$Y = CV$
+$$
+Y = CV
+$$

@@ -26,9 +26,9 @@ subsystem 子系统，具体的资源控制器（resource class 或者 resource 
 - Devices (devices)：允许或者拒绝 cgroup 中任务对设备的访问
 - Freezer (freezer)：挂起或者重启 cgroup 中的任务
 - Memory (memory)：限制 cgroup 中任务使用内存的量，并生成任务当前内存的使用情况报告
-- Network Classifier(net<sub>cls</sub>)：为 cgroup 中的报文设置上特定的 classid 标志，这样 tc 等工具就能根据标记对网络进行配置
-- Network Priority (net<sub>prio</sub>)：对每个网络接口设置报文的优先级
-- perf<sub>event</sub>：识别任务的 cgroup 成员，可以用来做性能分析
+- Network Classifier(net_cls)：为 cgroup 中的报文设置上特定的 classid 标志，这样 tc 等工具就能根据标记对网络进行配置
+- Network Priority (net_prio)：对每个网络接口设置报文的优先级
+- perf_event：识别任务的 cgroup 成员，可以用来做性能分析
 
 # VFS
 
@@ -38,4 +38,4 @@ cgroup 内核功能比较有趣的地方是它没有提供任何的系统调用�
 
 ![](img/2024-04-08_22-17-08_screenshot.png)
 
-我们把 CPU 和 Memory subsytem 挂载到了 `/cpu_mem_cg/` 这个目录下，把 net<sub>cls</sub> subsystem 挂在到了 `/net/` 这个目录下。 `/cpu_mem_cg/` 下有 `cg1, cg2` 两个 cgroup ，他们占据了不同的 CPU 和内存资源，对应 `/cpu_mem_cg/cg1/` 和 `/cpu_mem_cg/cg2/` 两个文件夹，而 `/net/` 下只有 `cg3` 一个 cgroup ，对应 `/net/cg3/` 文件夹。其中 httpd 进程的 `PID` 是 `54656` ，这个 PID 在 `/cpu_mem_cg/cg1/tasks, /net/cg3/tasks` 文件中都有记录。
+我们把 CPU 和 Memory subsytem 挂载到了 `/cpu_mem_cg/` 这个目录下，把 net_cls subsystem 挂在到了 `/net/` 这个目录下。 `/cpu_mem_cg/` 下有 `cg1, cg2` 两个 cgroup ，他们占据了不同的 CPU 和内存资源，对应 `/cpu_mem_cg/cg1/` 和 `/cpu_mem_cg/cg2/` 两个文件夹，而 `/net/` 下只有 `cg3` 一个 cgroup ，对应 `/net/cg3/` 文件夹。其中 httpd 进程的 `PID` 是 `54656` ，这个 PID 在 `/cpu_mem_cg/cg1/tasks, /net/cg3/tasks` 文件中都有记录。

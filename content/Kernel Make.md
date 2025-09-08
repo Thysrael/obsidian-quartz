@@ -8,6 +8,6 @@
 - 检查和配置环境
 - 创建符号链接和目录
 
-# prepare<sub>modules</sub>
+# prepare_modules
 
 只准备内核模块编译所需要的环境。

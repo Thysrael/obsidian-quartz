@@ -18,29 +18,31 @@
 
 线性规划的标准型如下所示：
 
-``` math
-\max c^{T}x
-Ax \leq b
-x \geq 0
-```
+$$
+\begin{aligned}
+\max c^{T}x \\
+Ax \leq b \\
+x \geq 0 \\
+\end{aligned}
+$$
 
 为了将普通 PL 转换成 Standard PL ，需要进行转化：
 
 非标准型可能存在的三种情况:
 
-1.  目标函数为$\min z$ 类型
-2.  存在$=, \geq$ 约束条件（非标准形式）
-3.  某些变量$x_{i}$ 缺少$x_{i} \geq 0$ 的非负约束
+1.  目标函数为 $\min z$ 类型
+2.  存在 $=, \geq$ 约束条件（非标准形式）
+3.  某些变量 $x_{i}$ 缺少 $x_{i} \geq 0$ 的非负约束
 
 前两种情况的处理方法:
 
-1.  目标函数转成$\max -z$
+1.  目标函数转成 $\max -z$
 2.  $f(x) = k$ 转成 $k \leq f(x) \leq k$
 3.  $f(x) \geq k$ 转成 $-f(x) \leq -k$
 
-对无约束变量\$x<sub>i</sub>\$：
+对无约束变量 $x_i$：
 
-1.  令$x_{i} = x_{i_1} - x_{i_2}$ （替换所有原$x_{i}$)
+1.  令 $x_{i} = x_{i_1} - x_{i_2}$ （替换所有原$x_{i}$)
 2.  新增两个约束： $x_{i_1} \geq 0, \quad x_{i_2} \geq 0$
 
 # Duality
@@ -49,25 +51,29 @@ x \geq 0
 
 标准型如下：
 
-``` math
-\max c^{T}x
-Ax \leq b
-x \geq 0
-```
+$$
+\begin{aligned}
+\max c^{T}x \\
+Ax \leq b \\
+x \geq 0 \\
+\end{aligned}
+$$
 
 则他的对偶问题为：
 
-``` math
-\min b^{T}y
-A^{T}y \geq c
+$$
+\begin{aligned}
+\min b^{T}y \\
+A^{T}y \geq c \\
 y \geq 0
-```
+\end{aligned}
+$$
 
 对偶定理告诉我们，始终有：
 
-``` math
+$$
 \max c^{T}x \leq \min b^{T}y
-```
+$$
 
 而二者取等的时刻，就是两者去到最值的时刻。
 

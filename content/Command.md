@@ -20,7 +20,7 @@
 - 设备文件操作：[[Dd]]
 - 压缩/解压缩：[[UnZip]]
 - root 权限代理：[[Sudo]]
-- compile\\<sub>commands</sub>.json 生成工具：[[Bear]]
+- `compile_commands.json` 生成工具：[[Bear]]
 - 文件查找：[[Find]]
 - 正则搜索：[[Grep]]
 - 压缩文件：[[tar.gz, zip, 7z, rar]]

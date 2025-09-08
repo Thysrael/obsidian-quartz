@@ -54,13 +54,13 @@ runspec all
 
 而实际上， `runspec` 有多个命令选项，它们都可以使用 `--help` 参数查看，其中比较重要的有：
 
-| 短选项 | 长选项 | 说明 |
-|----|----|----|
-| -c | –config | 或 –conf |
-| -a | –action | 参数 run 代表运行，常用参数还有 build 等 |
-| -i | –size | 表示数据集大小，数据集共有三种：test、train、ref |
-| -n | –iterations | 表示每个 benchmark 的运行次数 |
-|  | output<sub>format</sub> | 输出文件的格式，选项有：txt, html, cfg, pdf, csv |
+| 短选项 | 长选项           | 说明 |
+| --- | ------------- | ------------------------------------ |
+| -c | –config       | 或 –conf |
+| -a | –action       | 参数 run 代表运行，常用参数还有 build 等 |
+| -i | –size         | 表示数据集大小，数据集共有三种：test、train、ref |
+| -n | –iterations   | 表示每个 benchmark 的运行次数 |
+|  | output_format | 输出文件的格式，选项有：txt, html, cfg, pdf, csv |
 
 这些选项又都可以写到配置文件中，对于单个样例，有配置文件：
 

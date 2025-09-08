@@ -77,7 +77,7 @@ A800/H800 是针对中国特供版（低配版），相对于 A100/H100，主要
 
 # Roofline
 
-看到一个很不错的 Roofline 的图：
+看到一个很不错的 [[Roofline]] 的图：
 
 ![](img/clipboard-20250506T145107.png)
 

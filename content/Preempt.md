@@ -5,7 +5,7 @@ Linux 内核提供了多种内核抢占模式，用于在吞吐和延迟之间 t
 内核抢占模型的一个重要概念是抢占点（preemption points），它指的是代码中发生内核抢占的位置（更直观粗糙一些的说就是调用 `__schedule()` 的位置），一共有以下几类：
 
 1.  常规：硬件中断返回内核处、内核返回用户空间处
-2.  启发式：调用 cond<sub>sched</sub>() 或者 might<sub>sleep</sub>() 处，这两个函数类似于 yield()
+2.  启发式：调用 `cond_sched()` 或者 `might_sleep()` 处，这两个函数类似于 `yield()`
 3.  条件变化：开启抢占、释放自旋锁、开软中断
 
 并不是每个抢占点都真的会发生抢占，这大概取决于几种因素：
@@ -18,11 +18,11 @@ Linux 内核提供了多种内核抢占模式，用于在吞吐和延迟之间 t
 
 Linux Kenerl 本身的抢占模型分为 4 种：
 
-- PREEMPT<sub>NONE</sub>：并不抢占，一个内核线程只会在时间片耗尽、发生阻塞和调用 cond<sub>sched</sub> 时自愿放弃 CPU
-- PREEMPT<sub>VOLUNTARY</sub>：和 PREEMPT<sub>NOE</sub> 一样，只是有更多的 might<sub>sleep</sub> 来自愿放弃 CPU
-- PREEMPT<sub>FULL</sub>：基本上在任何会导致 preempt<sub>counter</sub> 变化的时候都会进行抢占，只要 preempt<sub>counter</sub> == 0 就立刻抢占。
-- PREEMPT<sub>RT</sub>：类似于 PREEMPT<sub>FULL</sub>，为 RT workload 设计，所以条件判断会松一些。
+- `PREEMPT_NONE`：并不抢占，一个内核线程只会在时间片耗尽、发生阻塞和调用 `cond_sched` 时自愿放弃 CPU
+- `PREEMPT_VOLUNTARY`：和 `PREEMPT_NOE` 一样，只是有更多的 `might_sleep` 来自愿放弃 CPU
+- `PREEMPT_FULL`：基本上在任何会导致 `preempt_counter` 变化的时候都会进行抢占，只要 `preempt_counter == 0` 就立刻抢占。
+- `PREEMPT_RT`：类似于 `PREEMPT_FULL`，为 RT workload 设计，所以条件判断会松一些。
 
-每次内核在 reboot 后只能是其中的一种模型，并不能动态调整。这就导致对于非抢占内核（NONE，VOLUNTARY），它面对那种会耗尽整个时间片的内核任务，就只能使用 cond<sub>sched</sub> 来自愿放弃 CPU 来提高系统的实时性。
+每次内核在 reboot 后只能是其中的一种模型，并不能动态调整。这就导致对于非抢占内核（NONE，VOLUNTARY），它面对那种会耗尽整个时间片的内核任务，就只能使用 `conds_ched` 来自愿放弃 CPU 来提高系统的实时性。
 
-这种“启发式的自愿放弃法”会导致非抢占的内核中弥散着各种 cond<sub>sched</sub> 函数，这些函数的维护性非常差，因为我们需要解释为什么在这个点可以自愿放弃 CPU，当这个点附近的代码发生变化的时候，这个启发式的抢占点的位置也需要调整。而且这种启发式的方法，可能导致有一些可能潜在的自愿放弃点没有被发现。
+这种“启发式的自愿放弃法”会导致非抢占的内核中弥散着各种 `cond_sched` 函数，这些函数的维护性非常差，因为我们需要解释为什么在这个点可以自愿放弃 CPU，当这个点附近的代码发生变化的时候，这个启发式的抢占点的位置也需要调整。而且这种启发式的方法，可能导致有一些可能潜在的自愿放弃点没有被发现。
