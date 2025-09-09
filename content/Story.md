@@ -26,15 +26,13 @@
 - 窗口：[[Window]]
 - 脉动阵列与张量核：[[Systolic Array vs Tensor Core]]
 - 不可变性：[[Immutability]]
+- SIMD 与 SIMT：[[SIMD vs SIMT]]
 
-# Novel
+# Art
 
 - [[汪曾祺]]
 - [[新字 vs 新词]]
 - [[白鹿原]]
 - [[金瓶梅]]
-- [[Subject vs Object]]
-
-# Art
-
+- 主语与宾语：[[Subject vs Object]]
 - 印象派: [[Impression]]
