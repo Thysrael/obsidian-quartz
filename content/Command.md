@@ -29,3 +29,4 @@
 - 二进制文件查找：[[Whereis]]
 - 构建选项配置：[[Configure]]
 - 调试器：[[GDB]]
+- 增加用户：[[AddUser]]

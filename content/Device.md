@@ -30,13 +30,17 @@
 
 这里记录一些常见设备的参数：
 
-- IPU MK2 的 inter-core 带宽是 5.5 GB/s ，共有 1472 个核，所以总带宽是 8,096 GB/s 。
 - HBM 4 的带宽是 1,638 GB/s 。
 - NVLink 的带宽是 800GB/s 。
 - DDR 4 3200 的带宽是 25.6 GB/s 。
+- PCIe 的带宽与版本和通道数有关（总之大约是 10x GB/s 带宽的），目前最好的 PCIe 一般是 16 通道：
+	- PCIe 3.0：约 1 GB/s 每通道
+	- PCIe 4.0：约 2 GB/s 每通道
+	- PCIe 5.0：约 4 GB/s 每通道
+- NVIDIA A100 GPU 是 19,500 GFLOPS 。
+- IPU MK2 的 inter-core 带宽是 5.5 GB/s ，共有 1472 个核，所以总带宽是 8,096 GB/s 。
 - IPU MK2 的 FLOPS 是 250~280 TFLOPS(10<sup>12</sup>) ，即 265,000 GFLOPS 。
 - APPLE M2 GPU 是 3,600 GFLOPS 。
-- NVIDIA A100 GPU 是 19,500 GFLOPS 。
 - Intel i5-9600K 单核是 6.3 GFLOPS ，多核是 37.3 GFLOPS 。
 - Mate60 GPU 2,300 GFLOPS 。
 - Google TPUv4 是 275,000 GFLOPS 。
