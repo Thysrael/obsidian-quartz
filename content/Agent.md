@@ -16,6 +16,8 @@ Agent 是为赋予 LLM 操纵工具的能力而设计的。它运行在 local �
 
 ![](img/clipboard-20250530T155925.png)
 
+如果把 LLM 看作“大脑”，而工具看作是“手脚”，那么 Agent 的本质就是连接二者的“神经”。Agent 负责协调 LLM 和工具（后面会演变成 MCP Server）。
+
 # Function Call
 
 在 Agent 与 LLM 进行通信的时候，由于输出的不稳定性，LLM 可能并不能正确生成回答，并通过 Agent 调用 Tools 。当遇到这种情况时，就需要 Agent 重发请求，这就对 LLM 资源是一种浪费。
@@ -27,6 +29,8 @@ Agent 是为赋予 LLM 操纵工具的能力而设计的。它运行在 local �
 ![](img/clipboard-20250530T160547.png)
 
 但是为 LLM 引入 Function Call 需要额外的训练成本，所以并不是所有的 LLM 都支持 Function Call 。
+
+也就是说，Function Call 是一种规范，它最终的目的是，让 LLM 的输出更加规范。
 
 # MCP
 

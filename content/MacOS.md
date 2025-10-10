@@ -10,7 +10,7 @@ defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 ```
 
-此外也可以完全关闭 Finder 生成 `.DS_store` 的能力，但是我不确定是不是真的完全关掉了：
+此外也可以完全关闭 Finder 生成 `.DS_store` 的能力，但是我不确定是不是真的完全关掉了（经过实践以后发现并不会真的关掉）：
 
 ```shell
 defaults write com.apple.finder AppleShowAllFiles FALSE
@@ -41,3 +41,21 @@ setenv CONTINUE_GLOBAL_DIR "$HOME/.config/continue/"
 ```conf
 auth sufficient pam_tid.so
 ```
+
+# 访问权限
+
+在使用 [[Kitty]] 这样的终端程序的时候，经常会出现一些 "permission" 的报错，即使加上 `sudo` 也会有这种现象。
+
+此时我们可以在 `system setting` 里选择 `privacy & Security` ，然后再选择 `Full Disk Access`，将对应程序的权限打开即可。
+
+如果希望让程序拥有卸载其他程序（比如 Appcleaner）的权利，也可以选择 `App Management` 来完成。
+
+# 下载非官方 App
+
+使用如下命令可以解决“已损坏，无法打开。您应该将它移到废纸篓​”的报错。
+
+```
+xattr -cr /Applications/<APP_NAME>
+```
+
+可以在 [这里](https://appstorrent.ru/) 下载软件。

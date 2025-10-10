@@ -70,3 +70,25 @@ sudo update-alternatives --config gcc
 ``` shell
 sudo update-alternatives --remove gcc /usr/bin/gcc-4.8
 ```
+
+# Apt Hold
+
+Ubuntu 是有自动更新功能的，因此有可能我们啥也没干，环境就崩了。但是如果完全禁用 ubuntu 的更新功能，可能会错过漏洞补丁的更新。
+
+因此我们可以使用如下命令来锁定某些软件包的自动更新：
+
+```Shell
+sudo apt-mark hold <package-name>
+```
+
+使用如下命令撤销更新：
+
+```shell
+sudo apt-mark unhold <package-name>
+```
+
+查看锁定的软件列表：
+
+```shell
+apt-mark showhold
+```

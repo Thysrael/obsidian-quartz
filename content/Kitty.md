@@ -1,9 +1,15 @@
-Kitty 终端使用的是远超 256 的真彩色（true color），被称为 `xterm-kitty` 。
+Kitty 终端使用的是远超 256 的真彩色（true color），被称为 `xterm-kitty` 。如果直接使用，会出现 `xterm-kitty unknown` 的报错。
 
-在有些服务器上可能没有，似乎 kitty 会主动给 server 安装，但是如果没有 `sudo` 权限似乎就会安装失败。
+初次使用的时候，应当使用如下命令来代替 `ssh` 命令：
 
-这个时候我们可以找到我们 PC 上的 `~/.terminfo/` 文件夹，并将其中的内容移动到 server 上。然后设置环境变量：
+```shell
+kitten ssh <host>
+```
 
-``` shell
-export TERM=xterm-kitty
+这样 Kitty 就会自动安装 `~/.terminfo/` 。
+
+但是如果是 root 用户，就不会自动安装了，但是此时我们可以使用如下软件包来解决这个问题：
+
+```shell
+sudo apt install kitty-terminfo
 ```
