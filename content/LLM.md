@@ -6,8 +6,7 @@
 # Components
 
 - [[Tokenizer]]
-- [[KV Cache]]
-- [[RoPE]]
+- [[Norm]]
 
 # Model Family
 
@@ -18,5 +17,4 @@
 
 - [[Agent]]
 - [[SP]]
-- [[FlashAttention]]
 - [[TP]]
