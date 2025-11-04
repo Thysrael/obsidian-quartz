@@ -12,6 +12,7 @@ Python 还是太全面了~
 - 作用域：[[Python Scope]]
 - 协程：[[Python Async]]
 - 解包：[[Python Unpacking]]
+- 广播：[[BroadCast]]
 
 # 工具
 
@@ -26,3 +27,8 @@ Python 还是太全面了~
 # 函数式编程
 
 - 闭包：[[Python Closure]]
+
+# 包
+
+- [[NumPY]]
+- [[PyTorch]]

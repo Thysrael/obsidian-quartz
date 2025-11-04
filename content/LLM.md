@@ -2,6 +2,7 @@
 
 - [[Transformer]]
 - [[MoE]]
+- [[Linear Attention]]
 
 # Components
 
