@@ -14,7 +14,7 @@ NVIDIA 家的 GPGPU 架构如下所示：
 
 顺便说一下，Ada 是第一个女程序员，Blackwell 是一个黑人数学家。此外更加详细的数据可以在 [官网](https://www.nvidia.cn/geforce/graphics-cards/compare/?section=compare-specs) 上看到。
 
-此外，除了以科学家的身份命名外，GPU 架构还有数字命名，比如说：
+此外，除了以科学家的身份命名外，GPU 架构还有数字命名（或者说是指令集版本号），比如说：
 
 - Kepler (sm30, sm35, sm37)
 - Maxwell (sm50, sm52, sm53)

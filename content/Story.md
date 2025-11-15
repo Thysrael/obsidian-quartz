@@ -9,6 +9,7 @@
 - Git 诞生：[[from Bitkeeper to Git]]
 - X86 架构发展历史：[[X86 History]]
 - Unix 发展历史：[[Unix History]]
+- 三次数学危机：[[Mathematical Crisis]]
 
 # Insight
 
