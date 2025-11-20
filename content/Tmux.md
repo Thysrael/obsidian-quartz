@@ -24,7 +24,7 @@ tmux kill-session -t <session>
 
 有如下快捷键：
 
-- `C-b d`: 断开 sesssion
+- `C-b d`: 断开 session
 
 # Window
 

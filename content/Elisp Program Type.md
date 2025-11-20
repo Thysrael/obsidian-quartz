@@ -10,7 +10,7 @@
 
 # Predicate
 
-Predicate 是“断言”的意思，来自离散数学中 [[谓词]] 的概念。它在 elisp 中就是布尔函数的意思，可以用来判断某个 Object 是某种类型。这对于弱类型的 elisp 来说非常重要。
+Predicate 是“断言”的意思，来自离散数学中 [[Predicate]] 的概念。它在 elisp 中就是布尔函数的意思，可以用来判断某个 Object 是某种类型。这对于弱类型的 elisp 来说非常重要。
 
 # Number
 

@@ -28,6 +28,7 @@
 - 脉动阵列与张量核：[[Systolic Array vs Tensor Core]]
 - 不可变性：[[Immutability]]
 - SIMD 与 SIMT：[[SIMD vs SIMT]]
+- 编译与链接：[[Compile vs Link]]
 
 # Art
 

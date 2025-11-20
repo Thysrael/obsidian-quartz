@@ -47,7 +47,7 @@ VAR = hello
 VAR ?= hi
 
 all:
-    echo$(VAR) # hello
+    echo $(VAR) # hello
 ```
 
 ## 立即变量和延迟变量

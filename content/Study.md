@@ -4,7 +4,7 @@
 
 - [[Language]]
 - [[OS]]
-- [[离散数学]]
+- [[Discrete Math]]
 - [[AI]]
 - [[Graphics]]
 - [[DBMS]]
