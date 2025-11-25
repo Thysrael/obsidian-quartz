@@ -1,0 +1,1 @@
+一个 [[Python]] 写的构建系统，语法上面也类似 Python，并不完全是 Python，其实更像是 Python2 的语法。

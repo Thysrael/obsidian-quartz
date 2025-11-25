@@ -30,4 +30,4 @@
 - 构建选项配置：[[Configure]]
 - 调试器：[[GDB]]
 - 增加用户：[[AddUser]]
-- 构建系统：[[CMake]], [[Make]], [[Ninja]]
+- 构建系统：[[CMake]], [[Make]], [[Ninja]], [[Scons]]

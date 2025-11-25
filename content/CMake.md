@@ -127,7 +127,7 @@ set_common_warnings(lib1) # 为 lib1 添加警告
 
 一些 target，是需要其他一些 target 的。比如说一个可执行文件，依赖于一个库文件。可执行文件是一个 target，库文件同样是一个 target。cmake 就是靠着这种 target 之间的联系，组织起了一个复杂的构建系统。
 
-其实这个概念在 GNU Make 中也有体现，只不过没有 cmake 演化得这么全面。
+其实这个概念在 GNU Make 中也有体现，只不过没有 cmake 演化得这么全面。BTW，这个东西在 [[Scons]] 中被叫作 `Node` 。
 
 ## Types
 
