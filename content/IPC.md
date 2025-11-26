@@ -1,3 +1,4 @@
-- 信号：[[Signal]]
-- 套接字：[[Socket]]
-- 桌面消息总线：[[DBus]]
+- [[Signal]]
+- [[Socket]]
+- [[DBus]]
+- [[Binder]]

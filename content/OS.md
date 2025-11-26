@@ -26,6 +26,7 @@ Stage2 Bootloader 主要负责加载内核：
 - [[Linux]]
 - [[Unix]]
 - [[Windows]]
+- [[Harmony]]
 
 # 组件
 
