@@ -16,3 +16,5 @@
 - [[Philosophy]]
 - [[Algorithm]]
 - [[Linear Algebra]]
+- [[Economy]]
+- [[Statistics]]
