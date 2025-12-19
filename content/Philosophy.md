@@ -1,5 +1,6 @@
 - 关于思维的认识，辩证法：[[Dialectics]]
 - 形而上学：[[MetaPhysics]]
+- 静态机械论：[[Mechanism]]
 - 自组织性和元胞自动机：[[Cellular Automata]]
 - 涌现：[[Emergence]]
 - 异化：[[Alienation]]
