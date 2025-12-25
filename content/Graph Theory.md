@@ -140,7 +140,7 @@ Dijkstra 的算法就是迭代 $V$ 次，每次挑选出最小的值对应的点
 
 ## 所有顶点间的最短路径
 
-我们解决这个问题使用基于 [[DP]] 的 Floyd-Warshall 算法。
+我们解决这个问题使用基于 [[Dynamic Programming]] 的 Floyd-Warshall 算法。
 
 其中状态设计为 $dist(i, j, k)$ 为仅仅允许使用 ${1, 2, \cdots, k}$ 作为中间节点的时候，$i$ 到 $j$ 的最短路径长度。
 

@@ -1,4 +1,4 @@
-- [[DP]]
+- [[Dynamic Programming]]
 - [[Linear Programming]]
 - [[Graph Theory]]
 - [[Approximation Algorithm]]

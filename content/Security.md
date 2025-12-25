@@ -1,4 +1,4 @@
-- [[加密]]
+- [[Encrypt]]
 - [[Hierarchical vs Capability]]
 - [[Attack]]
 - [[Web of Trust]]
