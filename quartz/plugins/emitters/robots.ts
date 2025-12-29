@@ -14,6 +14,7 @@ Allow: /
 
 Sitemap: ${sitemapUrl}
 `
+    await fs.promises.mkdir(argv.output, { recursive: true })
     await fs.promises.writeFile(path, content)
     return [path] as FilePath[]
   },
