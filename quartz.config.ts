@@ -13,7 +13,8 @@ const config: QuartzConfig = {
     enableSPA: true,
     enablePopovers: true,
     analytics: {
-      provider: "plausible",
+      provider: "google",
+      tagId: "G-KRSC8PN4XW",
     },
     locale: "en-US",
     baseUrl: "thysrael.github.io/obsidian-quartz/",
