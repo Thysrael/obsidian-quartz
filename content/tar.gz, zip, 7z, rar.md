@@ -30,10 +30,22 @@ tar xzvf archive_name.tar.gz -C /path/to/destination
 zip archive_name.zip file1 file2 file3
 ```
 
+如果希望压缩文件，需要指定 `-r` 参数：
+
+```shell
+zip -r archive_name.zip dir/
+```
+
 使用如下命令进行解压缩：
 
 ``` shell
 unzip archive_name.zip -d /path/to/destination
+```
+
+也可以用于查看压缩包内容
+
+```shell
+unzip -l archive.zip
 ```
 
 使用如下命令加密压缩包：

@@ -1,4 +1,4 @@
-- [[Shell Shorcuts]]
+- [[Shell Shortcuts]]
 - [[Shell MiniConfig]]
 - [[ShellScript]]
 

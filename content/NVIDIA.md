@@ -1,5 +1,5 @@
 - [[NCCL]]
-- [[cuBLAS]]
+- [[CUBLAS]]
 - [[CUDA]]
 - [[Triton]]
 - [[CUTLASS]]

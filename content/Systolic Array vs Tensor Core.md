@@ -16,6 +16,6 @@ Tensor Core 是一种 3D 结构，也就是说对于第 $(i, j, k)$ PE ，在其
 
 所以 Tensor Core 应该是比脉动阵列要快的。
 
-另外还有一个酷炫的动图，演示的是 tensor core 在处理比自己规模大的矩阵时是如何分片的，此外我们也可以看到 Pascal 架构的 Tensor Core 是无法一次性进行乘法运算的（可能其他 tensor core 也不行，只是时钟频率提高了看不出来）：
+另外还有一个酷炫的动图，演示的是 tensor core 在处理比自己规模大的矩阵时是如何分片的，此外我们也可以看到 Pascal 架构是无法一次性进行乘法运算的（因为它没有 tensor core，所以只能使用 cuda core 进行计算）：
 
 ![](img/tensorcore.gif)

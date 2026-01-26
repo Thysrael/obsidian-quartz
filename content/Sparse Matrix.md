@@ -4,7 +4,7 @@
 
 这种格式有一个问题，就是我们没法快速抽取其中的一行或者一列，如果想办到这一点，就必须遍历整个数组，效率就太低了。因此我们引入了 CSR 和 CSC 格式，分别用于快速访问特定一行或一列的元素。
 
-CSR 分 `Index Pointers`、`Indices`、`Data` 3个数组存储。
+CSR 分 `Index Pointers`、`Indices`、`Data` 3 个数组存储。
 
 - `Index Pointers`：第 `i` 个元素记录这个矩阵的第 `i` 行的第1个非零值在 `Data` 数组的起始位置，第 `i+1` 个元素记录这个矩阵的第 `i` 行的最后一个非零值在 `Data` 数组的终止位置（不包含右边界）。因此，这个矩阵的行数等于 `len(Index Pointers)-1` ，第 `i` 行非零值的个数等于 `Index Pointers[i+1]-Index Pointers[i]` 。
 - `Indices`：第 `i` 个元素记录这个矩阵的第 `i` 个非零值的列坐标。
