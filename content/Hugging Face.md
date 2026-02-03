@@ -8,9 +8,13 @@ HF 最初是以开发 chatbot 为目标的，但是后来转向称为机器学�
 
 `transformers` 库是由 Hugging Face 开发和维护的一个开源库，专注于自然语言处理（NLP）任务。它提供了对多种预训练模型的访问和使用，这些模型是当前 NLP 领域的前沿技术。它最开始是一个对于 [[Transformer]] 架构的开源实现。
 
-但是随着各种先进 Attention 后端的兴起，`transformers` 库就退化成了一个模型下载
+但是随着各种先进 Attention 后端的兴起，`transformers` 库就逐渐退化了，他目前有两个作用：
+
+- 为不同模型提供统一的描述与分发格式，包括模型的结构，权重文件的格式等。再次基础上，基本上所有的模型，都可以用 `transformers` 下载
+- 承担一些外围任务，比如 tokenizer 和 loader 的实现。
 
 # Download Model
+
 Model Hub 是 Hugging Face 提供的一个在线平台，用于存储、分享和发现预训练机器学习模型，特别是自然语言处理（NLP）模型。
 
 下模型这种庞大的任务，经常因为翻墙而导致崩溃，所以我们可以使用镜像站完成下载：
@@ -28,7 +32,7 @@ huggingface-cli download --resume-download Qwen/Qwen2.5-7B-Instruct-1M --local-d
 
 当遇到 Gated Model 的时候，需要 HuggingFace Token，可以在命令行参数中指定 `--token hf_***` 。
 
-在申请
+在申请的时候，如果填写中国大陆的学校，很容易申请不过。所以我们可以填写 Brazil State University of Campinas，基本上立刻就可以通过。
 
 此外，也可以使用 HuggingFace 提供的 `snapshot_download` 方法下载，脚本如下：
 

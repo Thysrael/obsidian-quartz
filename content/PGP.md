@@ -38,7 +38,7 @@ gpg --show-keys --fingerprint publickey.asc
 gpg --export --armor your_email@example.com > publickey.asc
 ```
 
-其中 `--armor` 指的是 ASCII ARMOR 的意思，就是 ASCII 格式， `.asc` 格式也是 ASCII 的意思。
+其中 `--armor` 指的是 ASCII ARMOR 的意思，就是 ASCII 格式， `.asc` 格式也是 ASCII 的意思。除了 `.asc` 这个后缀，常见的后缀还有 `.sig` 。
 
 # Encrypt vs Decrypt
 
