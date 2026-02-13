@@ -3,7 +3,7 @@
 - [[CUDA]]
 - [[Triton]]
 - [[CUTLASS]]
-- [[NVIDIA Install]]
+- [[NVIDIA Driver]]
 - [[PTX]]
 - [[SASS]]
 - [[NVIDIA Product]]

@@ -6,7 +6,6 @@ Python 还是太全面了~
 - 属性：[[Python Attribute]]
 - 基础语法：[[Python Basic]]
 - 控制流：[[Python Control Flow]]
-- 包与模块：[[Python Module Package]]
 - 切片：[[Python Slice]]
 - 异常处理：[[Python Exception]]
 - 作用域：[[Python Scope]]
@@ -17,7 +16,7 @@ Python 还是太全面了~
 # 工具
 
 - 包管理器：[[Conda vs Pip]]
-- 构建与发布：[[Python Build]]
+- 包与模块：[[Python Module, Package, Project]]
 
 # 元编程
 

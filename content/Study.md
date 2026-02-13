@@ -17,4 +17,5 @@
 - [[Algorithm]]
 - [[Linear Algebra]]
 - [[Economy]]
+- [[Finance]]
 - [[Statistics]]
