@@ -27,3 +27,11 @@ git config --global --unset <option>
 ``` shell
 git config --global https.proxy https://127.0.0.1:<port>
 ```
+
+# Mirror
+
+可以使用如下命令来设置 github 镜像站：
+
+```shell
+git config --global url."https://bgithub.xyz/".insteadOf https://github.com/
+```

@@ -4,7 +4,7 @@ ssh (Secure Shell) 为用户连接远端服务器的 shell 提供了安全的环
 
 ssh 具有 2 个特点：
 
-- 基于[[Asymmetric Encryption]]的安全认证，所以相比传统的网络服务程序，如 FTP、POP、Telnet 要更加安全。
+- 基于 [[Asymmetric Encryption]] 的安全认证，所以相比传统的网络服务程序，如 FTP、POP、Telnet 要更加安全。
 - 传输的数据是经过加密的，中间人攻击无效。
 - 传输的数据可以是经过压缩的，所以可以加快传输的速度。
 
