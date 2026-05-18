@@ -74,8 +74,8 @@ async function processOgImage(
   const cfg = ctx.cfg.configuration
   const slug = fileData.slug!
   const titleSuffix = cfg.pageTitleSuffix ?? ""
-  const title =
-    (fileData.frontmatter?.title ?? i18n(cfg.locale).propertyDefaults.title) + titleSuffix
+  const pageTitle = fileData.frontmatter?.title ?? i18n(cfg.locale).propertyDefaults.title
+  const title = `${cfg.pageTitle}: ${pageTitle}${titleSuffix}`
   const description =
     fileData.frontmatter?.socialDescription ??
     fileData.frontmatter?.description ??
