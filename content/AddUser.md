@@ -2,7 +2,7 @@
 
 可以使用如下命令添加用户：
 
-```
+```shell
 sudo adduser <username>
 ```
 
@@ -12,7 +12,7 @@ sudo adduser <username>
 
 简单说，如下脚本可以自动化完成：
 
-``` Shell
+```shell
 USER_NAME="newuser" 
 PUBLIC_KEY="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQ..."
 
