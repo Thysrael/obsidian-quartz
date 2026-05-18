@@ -39,7 +39,7 @@ Stage2 Bootloader 主要负责加载内核：
 - 虚拟化：[[Virtualization]]
 - 设备：[[Device]]
 - 安全：[[Security]]
-- 并行：[Note not found: Parralle](id:431af327-c60e-4f6f-852a-4784b3171bfe)
+- 并行：[[Parallel]]
 - 初始化：[[Init]]
 - 网络：[[Network]]
 
