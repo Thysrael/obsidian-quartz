@@ -1,3 +1,5 @@
+CP 即 Context Parallelism 。
+
 # Ring Self-Attention (RSA)
 
 Sequence Parrallel (SP) 指的是对于很长的输入序列，采用并行的方式，将序列分成多段，然后并行的进行处理。我个人觉得，应该是用在 training 或者 inference prefill 的时候。
@@ -14,13 +16,13 @@ $$
 
 RSA 就是采用 ring 的形式通信 $K, V$ 向量，如下所示：
 
-![](img/clipboard-20250619T104633.png)
+![](clipboard-20250619T104633.png)
 
 # DistAttention
 
 RSA 的缺点在于，对于 Mask Attention ，不同 node 之间存在负载不均衡的问题，因为对于不同行，它们的长度是不一样的。因此我们提出了取长补短的方式：
 
-![](img/clipboard-20250619T105625.png)
+![](clipboard-20250619T105625.png)
 
 不过似乎这里依然没有用 softmax reduce 的技术，只是在计算完 $QK^{T}$ 后，再将其发回原本应该的位置，然后再执行 softmax 。
 
@@ -34,8 +36,7 @@ RSA 的缺点在于，对于 Mask Attention ，不同 node 之间存在负载不
 
 Context Parallelism 与 Sequence Parrallelism 并没有区别，只不过现在 Sequence Parrallelism 的概念被 NVIDIA 抢占了，它指的是一种与 [[TP]] 进行结合的技术：
 
-![](img/clipboard-20250619T111409.png)
+![](clipboard-20250619T111409.png)
 
 SP 的核心是将张量并行（Tensor Parallelism, TP）无法覆盖的模块（如 LayerNorm、Dropout、全连接层等）通过序列维度拆分实现并行。但是具体是什么，我并不知道。
 
-所以严格意义上来说，这一篇博客的内容应该叫作 CP 。

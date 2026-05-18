@@ -13,9 +13,11 @@
 
 - [[BERT]]
 - [[GPT]]
+- [[DeepSeek]]
 
 # Misc
 
 - [[Agent]]
-- [[SP]]
+- [[CP]]
 - [[TP]]
+- [[Optimizer]]

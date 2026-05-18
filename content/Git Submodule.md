@@ -26,6 +26,14 @@ git clone --recursive <remote.git>
 git submodule update --init
 ```
 
+# 更新 submodule
+
+可以使用如下命令来更新 submodule：
+
+```shell
+git submodule update --remote --merge
+```
+
 # 删除 submodule
 
 除了需要在工作目录下删除，同时对于 git 本身也需要进行一些内容的删除：

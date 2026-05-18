@@ -100,7 +100,7 @@ DL 的典型模型如下：
 - [[RNN]]
 - [[ResNet]]
 - [[LLM]]
-- Autoencoders
+- AutoEncoders
 - [[GNN]]
 
 ## Generated Model
