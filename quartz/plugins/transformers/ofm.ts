@@ -284,7 +284,7 @@ export const ObsidianFlavoredMarkdown: QuartzTransformerPlugin<Partial<Options>>
                   if (!exists) {
                     return {
                       type: "html",
-                      value: `<a class=\"internal broken\">${alias ?? fp}</a>`,
+                      value: `<a class=\"internal broken wikilink\">${alias ?? fp}</a>`,
                     }
                   }
                 }
@@ -295,6 +295,11 @@ export const ObsidianFlavoredMarkdown: QuartzTransformerPlugin<Partial<Options>>
                 return {
                   type: "link",
                   url,
+                  data: {
+                    hProperties: {
+                      className: ["wikilink"],
+                    },
+                  },
                   children: [
                     {
                       type: "text",

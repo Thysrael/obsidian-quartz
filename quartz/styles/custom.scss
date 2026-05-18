@@ -47,11 +47,15 @@ article > ol {
   text-wrap: balance;
 }
 
-.center h1 {
+.article-title {
   font-size: clamp(2.1rem, 1.55rem + 1.8vw, 2.8rem);
   line-height: 1.12;
   letter-spacing: -0.04em;
   margin-bottom: 1.4rem;
+}
+
+.center article h1 {
+  text-align: center;
 }
 
 .center h2 {
@@ -82,10 +86,43 @@ article .typst-doc {
   font-size: 1em;
 }
 
-article a.internal:not(:has(> img)) {
+article a.internal.wikilink:not(:has(> img)) {
+  position: relative;
+  display: inline-block;
   padding: 0.02rem 0.24rem;
   border-radius: 3px;
   line-height: 1.4rem;
+  transition:
+    color 0.18s ease,
+    background-color 0.18s ease;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: -0.08em;
+    right: -0.08em;
+    bottom: -0.08em;
+    height: 0.1em;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--secondary) 55%, transparent);
+    transition:
+      left 0.18s ease,
+      right 0.18s ease,
+      height 0.18s ease,
+      background-color 0.18s ease;
+  }
+
+  &:hover {
+    color: #9a3f3f;
+  }
+
+  &:hover::after {
+    left: -0.18em;
+    right: -0.18em;
+    bottom: -0.11em;
+    height: 0.16em;
+    background: color-mix(in srgb, #9a3f3f 72%, transparent);
+  }
 }
 
 article :not(pre) > code {
