@@ -13,14 +13,14 @@
 
 用代码表达：
 
-``` c
+```c
 secret = encrypt(key, message);
 message = decrypt(key, secret);
 ```
 
 也就是如下过程：
 
-![](2024-03-26_14-32-37_screenshot.png)
+![](img/2024-03-26_14-32-37_screenshot.png)
 
 # 实例
 
