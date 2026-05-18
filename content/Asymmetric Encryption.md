@@ -14,7 +14,7 @@
 
 # 现代密码学
 
-现代密码学的开端就是非对称加密算法的创立，这是因为非对称加密算法不仅解决了[[Symmetric Encryption]]算法密钥交换的漏洞，同时还对于检验密文的完整性和来源都提供了帮助。[[Digital Certificate]]和[[Digital Signature]]技术都基于此进行开发。
+现代密码学的开端就是非对称加密算法的创立，这是因为非对称加密算法不仅解决了 [[Symmetric Encryption]] 算法密钥交换的漏洞，同时还对于检验密文的完整性和来源都提供了帮助。[[Digital Certificate]] 和 [[Digital Signature]] 技术都基于此进行开发。
 
 非对称密码解决了对称密码的三个问题：
 
