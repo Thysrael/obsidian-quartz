@@ -124,10 +124,25 @@ button.desktop-explorer {
       color: var(--dark);
       opacity: 0.75;
       pointer-events: all;
+      display: block;
+      margin: 0.05rem 0;
+      padding: 0.08rem 0.35rem;
+      border-radius: 0.35rem;
+      transition:
+        color 0.18s ease,
+        background-color 0.18s ease,
+        opacity 0.18s ease;
+
+      &:hover {
+        opacity: 1;
+        color: var(--secondary);
+        background-color: color-mix(in srgb, var(--tertiary) 7%, transparent);
+      }
 
       &.active {
         opacity: 1;
-        color: var(--tertiary);
+        color: var(--secondary);
+        background-color: color-mix(in srgb, var(--tertiary) 12%, transparent);
       }
     }
   }
@@ -163,10 +178,16 @@ button.desktop-explorer {
     font-weight: $semiBoldWeight;
     line-height: 1.5rem;
     display: inline-block;
+    padding: 0.02rem 0.25rem;
+    border-radius: 0.35rem;
+    transition:
+      color 0.18s ease,
+      background-color 0.18s ease;
   }
 
   & div > a:hover {
-    color: var(--tertiary);
+    color: var(--secondary);
+    background-color: color-mix(in srgb, var(--tertiary) 7%, transparent);
   }
 
   & div > button {

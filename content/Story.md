@@ -30,6 +30,7 @@
 - SIMD 与 SIMT：[[SIMD vs SIMT]]
 - 编译与链接：[[Compile vs Link]]
 - 信息熵：[[Information Entropy]]
+- 训练中的批次：[[Epoch vs Batch]]
 
 # Art
 

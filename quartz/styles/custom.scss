@@ -147,6 +147,21 @@ figure[data-rehype-pretty-code-figure] {
   box-sizing: border-box;
 }
 
+figure[data-rehype-pretty-code-figure] {
+  margin-block: 1.65rem;
+}
+
+figure[data-rehype-pretty-code-figure] > [data-rehype-pretty-code-title] {
+  border-color: color-mix(in srgb, var(--tertiary) 18%, var(--lightgray));
+  background: color-mix(in srgb, var(--tertiary) 7%, var(--light));
+}
+
+pre {
+  border-color: color-mix(in srgb, var(--tertiary) 18%, var(--lightgray));
+  background: color-mix(in srgb, var(--tertiary) 4%, var(--light));
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--dark) 5%, transparent);
+}
+
 article > p:has(> img:only-child),
 article > p:has(> a:only-child > img:only-child) {
   max-width: none;
@@ -193,6 +208,7 @@ article > .table-container {
 .table-container th {
   padding: 0.8rem 1rem;
   border-bottom: 1px solid color-mix(in srgb, var(--secondary) 32%, var(--lightgray));
+  background: color-mix(in srgb, var(--tertiary) 9%, var(--light));
   color: var(--dark);
   font-family: var(--headerFont);
   font-size: 0.92em;

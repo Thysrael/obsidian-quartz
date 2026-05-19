@@ -13,9 +13,3 @@ Attention 算子是一种获取上下文语义的结构，但是我一直很好�
 > Alice thinks himself is handsome.
 
 我相信 LLM 依然会发现“himself 具有 handsome 的语义”，也会发现“himeself 具有 Alice 的语义”，但是这离这句话最终的意思“Alice 具有 handsome 的语义”依然是有一定的距离的，所以只有再使用一次 Attention 机制，才能挖掘出这种更加深层次的语义。
-
-# Components
-
-- [[FlashAttention]]
-- [[KV Cache]]
-- [[RoPE]]
