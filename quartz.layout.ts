@@ -9,7 +9,7 @@ export const sharedPageComponents: SharedLayout = {
   footer: Component.Footer({
     links: {
       GitHub: "https://github.com/thysrael",
-      "Email": "mailto:thysrael@163.com",
+      Email: "mailto:thysrael@163.com",
     },
   }),
 }
@@ -41,7 +41,14 @@ export const defaultContentPageLayout: PageLayout = {
     Component.Explorer(),
   ],
   right: [
-    Component.Graph(),
+    Component.Graph({
+      localGraph: {
+        fontSize: 0.5,
+      },
+      globalGraph: {
+        fontSize: 0.4,
+      },
+    }),
     Component.DesktopOnly(Component.TableOfContents()),
     Component.Backlinks(),
   ],

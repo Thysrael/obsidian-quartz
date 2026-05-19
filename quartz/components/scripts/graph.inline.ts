@@ -161,6 +161,13 @@ async function renderGraph(graph: HTMLElement, fullSlug: FullSlug) {
       })),
   }
 
+  const nodeLinkCounts = new Map<SimpleSlug, number>()
+  for (const link of graphData.links) {
+    nodeLinkCounts.set(link.source.id, (nodeLinkCounts.get(link.source.id) ?? 0) + 1)
+    nodeLinkCounts.set(link.target.id, (nodeLinkCounts.get(link.target.id) ?? 0) + 1)
+  }
+  const maxNodeLinkCount = Math.max(...nodeLinkCounts.values(), 1)
+
   const width = graph.offsetWidth
   const height = Math.max(graph.offsetHeight, 250)
 
@@ -198,18 +205,20 @@ async function renderGraph(graph: HTMLElement, fullSlug: FullSlug) {
     const isCurrent = d.id === slug
     if (isCurrent) {
       return computedStyleMap["--secondary"]
-    } else if (visited.has(d.id) || d.id.startsWith("tags/")) {
-      return computedStyleMap["--tertiary"]
-    } else {
-      return computedStyleMap["--gray"]
     }
+
+    const linkRatio = (nodeLinkCounts.get(d.id) ?? 0) / maxNodeLinkCount
+    if (linkRatio >= 0.65) return "#8f5f5f"
+    if (linkRatio >= 0.45) return "#8a728f"
+    if (linkRatio >= 0.28) return "#647f96"
+    if (linkRatio >= 0.14) return "#789070"
+    if (visited.has(d.id) || d.id.startsWith("tags/")) return computedStyleMap["--tertiary"]
+    return "#7a7f87"
   }
 
   function nodeRadius(d: NodeData) {
-    const numLinks = graphData.links.filter(
-      (l) => l.source.id === d.id || l.target.id === d.id,
-    ).length
-    return 2 + Math.sqrt(numLinks)
+    const numLinks = nodeLinkCounts.get(d.id) ?? 0
+    return (d.id === slug ? 4.5 : 2.6) + Math.sqrt(numLinks) * 1.35
   }
 
   let hoveredNodeId: string | null = null
