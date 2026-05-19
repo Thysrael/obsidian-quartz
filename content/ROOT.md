@@ -9,4 +9,4 @@
 
 > Can you hear me?
 >
-> Call me *ROOT* !
+> Call me $\sqrt{\boldsymbol{\mathcal{R}}\!\mathit{oot}}$ !

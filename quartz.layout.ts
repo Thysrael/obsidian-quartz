@@ -43,10 +43,10 @@ export const defaultContentPageLayout: PageLayout = {
   right: [
     Component.Graph({
       localGraph: {
-        fontSize: 0.5,
+        fontSize: 0.8,
       },
       globalGraph: {
-        fontSize: 0.4,
+        fontSize: 0.9,
       },
     }),
     Component.DesktopOnly(Component.TableOfContents()),

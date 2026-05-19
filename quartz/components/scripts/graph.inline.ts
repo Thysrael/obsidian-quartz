@@ -50,6 +50,7 @@ type LinkRenderData = GraphicsInfo & {
 type NodeRenderData = GraphicsInfo & {
   simulationData: NodeData
   label: Text
+  labelBackground: Graphics
 }
 
 const localStorageKey = "graph-visited"
@@ -77,17 +78,16 @@ async function renderGraph(graph: HTMLElement, fullSlug: FullSlug) {
     drag: enableDrag,
     zoom: enableZoom,
     depth,
-    scale,
     repelForce,
     centerForce,
     linkDistance,
     fontSize,
-    opacityScale,
     removeTags,
     showTags,
     focusOnHover,
     enableRadial,
   } = JSON.parse(graph.dataset["cfg"]!) as D3Config
+  const configuredDepth = depth
 
   const data: Map<SimpleSlug, ContentDetails> = new Map(
     Object.entries<ContentDetails>(await fetchData).map(([k, v]) => [
@@ -167,6 +167,7 @@ async function renderGraph(graph: HTMLElement, fullSlug: FullSlug) {
     nodeLinkCounts.set(link.target.id, (nodeLinkCounts.get(link.target.id) ?? 0) + 1)
   }
   const maxNodeLinkCount = Math.max(...nodeLinkCounts.values(), 1)
+  let currentTransform = zoomIdentity
 
   const width = graph.offsetWidth
   const height = Math.max(graph.offsetHeight, 250)
@@ -221,6 +222,97 @@ async function renderGraph(graph: HTMLElement, fullSlug: FullSlug) {
     return (d.id === slug ? 4.5 : 2.6) + Math.sqrt(numLinks) * 1.35
   }
 
+  function nodeVisibleAtScale(d: NodeData, zoomScale: number) {
+    if (configuredDepth >= 0) return true
+    if (d.id === slug) return true
+
+    const linkRatio = (nodeLinkCounts.get(d.id) ?? 0) / maxNodeLinkCount
+    const clampedScale = Math.min(Math.max(zoomScale, 0.45), 3)
+    const zoomProgress = (clampedScale - 0.45) / 2.55
+    const minVisibleRatio = 0.28 * (1 - zoomProgress)
+    return linkRatio >= minVisibleRatio
+  }
+
+  function updateVisibilityForScale(zoomScale: number) {
+    const visibleNodes = new Set<SimpleSlug>()
+
+    for (const node of nodeRenderData) {
+      const visible = nodeVisibleAtScale(node.simulationData, zoomScale)
+      node.gfx.visible = visible
+      node.label.visible = visible
+      node.labelBackground.visible = visible
+      if (visible) visibleNodes.add(node.simulationData.id)
+    }
+
+    for (const link of linkRenderData) {
+      link.gfx.visible =
+        visibleNodes.has(link.simulationData.source.id) &&
+        visibleNodes.has(link.simulationData.target.id)
+    }
+  }
+
+  function updateLabelCollisions() {
+    const shownRects: { left: number; right: number; top: number; bottom: number }[] = []
+    const labelsByPriority = [...nodeRenderData]
+      .filter((node) => node.label.visible)
+      .sort((a, b) => {
+        if (a.simulationData.id === slug) return -1
+        if (b.simulationData.id === slug) return 1
+        if (a.active !== b.active) return a.active ? -1 : 1
+        return (
+          (nodeLinkCounts.get(b.simulationData.id) ?? 0) -
+          (nodeLinkCounts.get(a.simulationData.id) ?? 0)
+        )
+      })
+
+    for (const node of labelsByPriority) {
+      const label = node.label
+      const screenX = label.position.x * currentTransform.k + currentTransform.x
+      const screenY = label.position.y * currentTransform.k + currentTransform.y
+      const labelWidth = label.width * currentTransform.k
+      const labelHeight = label.height * currentTransform.k
+      const rect = {
+        left: screenX - labelWidth / 2 - 4,
+        right: screenX + labelWidth / 2 + 4,
+        top: screenY - labelHeight * 1.2 - 3,
+        bottom: screenY + 3,
+      }
+      const overlaps = shownRects.some(
+        (shown) =>
+          rect.left < shown.right &&
+          rect.right > shown.left &&
+          rect.top < shown.bottom &&
+          rect.bottom > shown.top,
+      )
+
+      label.alpha = overlaps ? 0 : 1
+      node.labelBackground.alpha = label.alpha
+      if (!overlaps) shownRects.push(rect)
+    }
+  }
+
+  function updateLabelBackgrounds() {
+    const paddingX = 6 / currentTransform.k
+    const paddingY = 3 / currentTransform.k
+    const radius = 5 / currentTransform.k
+
+    for (const node of nodeRenderData) {
+      const label = node.label
+      const bg = node.labelBackground
+      const bgWidth = label.width + paddingX * 2
+      const bgHeight = label.height + paddingY * 2
+      bg.position.set(label.position.x, label.position.y)
+      bg.clear()
+      bg.roundRect(-bgWidth / 2, -bgHeight * 1.12, bgWidth, bgHeight, radius)
+        .fill({ color: computedStyleMap["--light"], alpha: 0.78 })
+        .stroke({
+          color: node.color,
+          alpha: 0.22,
+          width: 1 / currentTransform.k,
+        })
+    }
+  }
+
   let hoveredNodeId: string | null = null
   let hoveredNeighbours: Set<string> = new Set()
   const linkRenderData: LinkRenderData[] = []
@@ -271,7 +363,7 @@ async function renderGraph(graph: HTMLElement, fullSlug: FullSlug) {
         alpha = l.active ? 1 : 0.2
       }
 
-      l.color = l.active ? computedStyleMap["--gray"] : computedStyleMap["--lightgray"]
+      l.color = l.active ? computedStyleMap["--secondary"] : computedStyleMap["--gray"]
       tweenGroup.add(new Tweened<LinkRenderData>(l).to({ alpha }, 200))
     }
 
@@ -288,7 +380,7 @@ async function renderGraph(graph: HTMLElement, fullSlug: FullSlug) {
     tweens.get("label")?.stop()
     const tweenGroup = new TweenGroup()
 
-    const defaultScale = 1 / scale
+    const defaultScale = 1 / currentTransform.k
     const activeScale = defaultScale * 1.1
     for (const n of nodeRenderData) {
       const nodeId = n.simulationData.id
@@ -376,9 +468,10 @@ async function renderGraph(graph: HTMLElement, fullSlug: FullSlug) {
   stage.interactive = false
 
   const labelsContainer = new Container<Text>({ zIndex: 3, isRenderGroup: true })
+  const labelBackgroundsContainer = new Container<Graphics>({ zIndex: 2, isRenderGroup: true })
   const nodesContainer = new Container<Graphics>({ zIndex: 2, isRenderGroup: true })
   const linkContainer = new Container<Graphics>({ zIndex: 1, isRenderGroup: true })
-  stage.addChild(nodesContainer, labelsContainer, linkContainer)
+  stage.addChild(linkContainer, nodesContainer, labelBackgroundsContainer, labelsContainer)
 
   for (const n of graphData.nodes) {
     const nodeId = n.id
@@ -387,28 +480,36 @@ async function renderGraph(graph: HTMLElement, fullSlug: FullSlug) {
       interactive: false,
       eventMode: "none",
       text: n.text,
-      alpha: 0,
+      alpha: 1,
       anchor: { x: 0.5, y: 1.2 },
       style: {
         fontSize: fontSize * 15,
         fill: computedStyleMap["--dark"],
         fontFamily: computedStyleMap["--bodyFont"],
+        fontWeight: "600",
       },
       resolution: window.devicePixelRatio * 4,
     })
-    label.scale.set(1 / scale)
+    label.scale.set(1 / currentTransform.k)
+    const labelBackground = new Graphics({ interactive: false, eventMode: "none" })
 
     let oldLabelOpacity = 0
     const isTagNode = nodeId.startsWith("tags/")
+    const isCurrentNode = nodeId === slug
+    const radius = nodeRadius(n)
+    const nodeColor = isTagNode ? computedStyleMap["--light"] : color(n)
     const gfx = new Graphics({
       interactive: true,
       label: nodeId,
       eventMode: "static",
-      hitArea: new Circle(0, 0, nodeRadius(n)),
+      hitArea: new Circle(0, 0, radius + 2),
       cursor: "pointer",
     })
-      .circle(0, 0, nodeRadius(n))
-      .fill({ color: isTagNode ? computedStyleMap["--light"] : color(n) })
+      .circle(0, 0, radius + 1.6)
+      .fill({ color: computedStyleMap["--light"], alpha: 0.72 })
+      .circle(0, 0, radius)
+      .fill({ color: nodeColor, alpha: 0.94 })
+      .stroke({ width: isCurrentNode ? 2 : 1, color: computedStyleMap["--light"], alpha: 0.9 })
       .on("pointerover", (e) => {
         updateHoverInfo(e.target.label)
         oldLabelOpacity = label.alpha
@@ -429,12 +530,14 @@ async function renderGraph(graph: HTMLElement, fullSlug: FullSlug) {
     }
 
     nodesContainer.addChild(gfx)
+    labelBackgroundsContainer.addChild(labelBackground)
     labelsContainer.addChild(label)
 
     const nodeRenderDatum: NodeRenderData = {
       simulationData: n,
       gfx,
       label,
+      labelBackground,
       color: color(n),
       alpha: 1,
       active: false,
@@ -458,7 +561,6 @@ async function renderGraph(graph: HTMLElement, fullSlug: FullSlug) {
     linkRenderData.push(linkRenderDatum)
   }
 
-  let currentTransform = zoomIdentity
   if (enableDrag) {
     select<HTMLCanvasElement, NodeData | undefined>(app.canvas).call(
       drag<HTMLCanvasElement, NodeData | undefined>()
@@ -519,17 +621,20 @@ async function renderGraph(graph: HTMLElement, fullSlug: FullSlug) {
         currentTransform = transform
         stage.scale.set(transform.k, transform.k)
         stage.position.set(transform.x, transform.y)
+        updateVisibilityForScale(transform.k)
 
-        // zoom adjusts opacity of labels too
-        const scale = transform.k * opacityScale
-        let scaleOpacity = Math.max((scale - 1) / 3.75, 0)
+        // keep labels readable while the graph itself zooms
+        const labelScale = 1 / transform.k
         const activeNodes = nodeRenderData.filter((n) => n.active).flatMap((n) => n.label)
 
         for (const label of labelsContainer.children) {
-          if (!activeNodes.includes(label)) {
-            label.alpha = scaleOpacity
+          if (label.visible) {
+            label.alpha = 1
+            label.scale.set(activeNodes.includes(label) ? labelScale * 1.1 : labelScale)
           }
         }
+        updateLabelBackgrounds()
+        updateLabelCollisions()
       })
 
     canvasSelection.call(zoomBehavior)
@@ -545,6 +650,9 @@ async function renderGraph(graph: HTMLElement, fullSlug: FullSlug) {
     app.canvas.addEventListener("wheel", handleWheelPan, { passive: false })
   }
 
+  updateVisibilityForScale(currentTransform.k)
+  updateLabelCollisions()
+
   let stopAnimation = false
   function animate(time: number) {
     if (stopAnimation) return
@@ -556,17 +664,21 @@ async function renderGraph(graph: HTMLElement, fullSlug: FullSlug) {
         n.label.position.set(x + width / 2, y + height / 2)
       }
     }
+    updateLabelBackgrounds()
 
     for (const l of linkRenderData) {
       const linkData = l.simulationData
       l.gfx.clear()
       l.gfx.moveTo(linkData.source.x! + width / 2, linkData.source.y! + height / 2)
-      l.gfx
-        .lineTo(linkData.target.x! + width / 2, linkData.target.y! + height / 2)
-        .stroke({ alpha: l.alpha, width: 1, color: l.color })
+      l.gfx.lineTo(linkData.target.x! + width / 2, linkData.target.y! + height / 2).stroke({
+        alpha: l.alpha * (l.active ? 0.92 : 0.58),
+        width: l.active ? 1.6 : 1,
+        color: l.color,
+      })
     }
 
     tweens.forEach((t) => t.update(time))
+    updateLabelCollisions()
     app.renderer.render(stage)
     requestAnimationFrame(animate)
   }
