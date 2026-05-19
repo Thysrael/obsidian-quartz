@@ -77,7 +77,10 @@ article > ol {
 
 .center blockquote {
   padding-left: 1.15rem;
+  padding-block: 0.7rem;
   border-left: 3px solid color-mix(in srgb, var(--secondary) 50%, var(--lightgray));
+  background: color-mix(in srgb, var(--tertiary) 7%, transparent);
+  border-radius: 0.5rem;
 }
 
 article .katex,
