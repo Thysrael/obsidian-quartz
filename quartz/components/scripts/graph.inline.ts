@@ -78,6 +78,7 @@ async function renderGraph(graph: HTMLElement, fullSlug: FullSlug) {
     drag: enableDrag,
     zoom: enableZoom,
     depth,
+    scale,
     repelForce,
     centerForce,
     linkDistance,
@@ -638,6 +639,10 @@ async function renderGraph(graph: HTMLElement, fullSlug: FullSlug) {
       })
 
     canvasSelection.call(zoomBehavior)
+    const initialTransform = zoomIdentity
+      .translate((1 - scale) * width * 0.5, (1 - scale) * height * 0.5)
+      .scale(scale)
+    canvasSelection.call(zoomBehavior.transform, initialTransform)
     handleWheelPan = (event) => {
       if (event.ctrlKey || event.metaKey) return
       event.preventDefault()
