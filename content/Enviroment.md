@@ -1,7 +1,6 @@
 这里记录着工作环境的工具：
 
 - 编辑器：[[Emacs]]
-- 截屏软件：Flameshot
 - 录屏软件：Peek
 - 远端仓库：[[Github]]
 - 输入法框架：[[Fcitx]]
@@ -21,4 +20,4 @@
 - 终端模拟器: [[Kitty]], [[Konsole]]
 - 办公工具：[[Office]]
 - 图形协议：[[Wayland]], [[X11]]
-- VPN: [[Clash]]
+- VPN 客户端: [[Clash]]

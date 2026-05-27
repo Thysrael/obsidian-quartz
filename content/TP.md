@@ -4,4 +4,6 @@ Tensor Parallelism ，本质是将模型横向切割。这种切割方式会引�
 
 那在 Inference 阶段呢？依然是用 TP ，这是因为 PP 就算没有因为 Backward 依赖导致的 Bubble ，也会因为 Inference 的 Batch Size 较小，而无法利用好流水线的问题，而 TP 则不会。
 
+此外 PP 还有一个非常明显的缺点，那就是它没有办法改善 Latency（分成多个阶段并不会有延迟的降低，甚至还有所增加），只能改善吞吐，这使得它在
+
 
