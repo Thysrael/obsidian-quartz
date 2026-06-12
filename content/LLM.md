@@ -23,6 +23,8 @@
 - [[Quantization]]
 - [[PyTorch]]
 - [[FlashAttention]]
+- [[DeepSpeed]]
+- [[Megatron-LM]]
 
 # Training
 
@@ -33,6 +35,3 @@
 # Misc
 
 - [[Agent]]
-
-
-

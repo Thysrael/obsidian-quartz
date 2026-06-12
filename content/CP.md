@@ -32,11 +32,21 @@ RSA 的缺点在于，对于 Mask Attention ，不同 node 之间存在负载不
 
 但是这样处理的问题就在于，需要维持一个非常大的 buffer 来容纳整行的 $QK^{T}$ ，而 FlashAttention 技术可以改善这一点，事实上，RingAttention 技术就可以理解为分布式的 FlashAttention 。
 
-# Context Parallelism
+# Sequence Parallelism
 
-Context Parallelism 与 Sequence Parrallelism 并没有区别，只不过现在 Sequence Parallelism 的概念被 NVIDIA 抢占了，它指的是一种与 [[TP]] 进行结合的技术：
+Sequence Parallelism 是 [[Megatron-LM]] 中提出的技术，并不是对于 Attention 中 Seq 维度的切分，从图中也可以看出在 `Self-Attention` 中使用的是 [[TP]] 而非 CP。
+
+它真正切分的是 LayerNorm 和 Dropout ，之所以这样切分，是因为这个部分也有 Seq 维度，并且不再适合用 TP 切分（也就是沿着模型权重的某个维度去切分，实际上大的维度是 seq 而非模型权重维度）。
+
 
 ![](img/clipboard-20250619T111409.png)
 
-SP 的核心是将张量并行（Tensor Parallelism, TP）无法覆盖的模块（如 LayerNorm、Dropout、全连接层等）通过序列维度拆分实现并行。但是具体是什么，我并不知道。
+因此 SP 的 size 是与 TP 保持一致的。
 
+# DeepSpeed Ulysses
+
+[[DeepSpeed]] 引入的技术，我觉得它最大的特点是，在存储方面，确实是以 Seq 维度去分布式的；但是在计算方面，通过首尾两个 all-to-all 的矩阵转置操作，将计算变成了一个以 Head 维度去分布式的思路（虽然图上画的是 `d` ，但是实际上这里的 `d` 是 head 与 dim 的乘积，一般而言我们不切分 dim ，只切分 head，因为这会涉及 reduce 操作）。
+
+![CP-20260529101750950](img/CP-20260529101750950.png)
+
+我听说思路这种使用的不多了，因为像 GQA 和 MLA 之类的技术影响，导致 head 数目减少，进而分布式效果并不好。
