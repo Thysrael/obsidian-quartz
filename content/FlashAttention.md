@@ -89,3 +89,25 @@ $$
 $$
 
 可以看到经过 $LSE$ 的修正，我们就可以在 1-Pass 内完成 Attention 计算。
+
+# Summary
+
+总结一下，FlashAttention 一共维护 3 个临时变量，分别是 `prefix_max`, `prefix_sum` 和 `prefix_acc`，它们都是每个 q 向量对应一个标量。它们分别有：
+
+```python
+X = Q @ K / sqrt(D)
+max = max(X)
+sum = sum(exp(X) - max(X))
+acc = (exp(X) - max(X)) @ V
+```
+
+我们的目的就是用三种 `prefix` 变量来最终更新到全局结果，有：
+
+```python
+pre_prefix_max = prefix_max
+prefix_max = max(prefix_sum, local_sum)
+prefix_sum = prefix_sum * (prefix_max - pre_prefix_max) + sum_local
+prefix_acc = prefix_acc * (prefix_max - pre_prefix_max) + (exp(X_local) - max(X_local)) @ V
+```
+
+可以看到 `prefix_sum` 和 `prefix_acc` 都是标量，都是被 `prefix_max - prefix_max` 所修正的。

@@ -28,4 +28,13 @@ NPU 架构如图所示：
 
 图中画的是一个 AIC 搭配两个 AIV ，实际上两者的比例是可以调整的。
 
-此外 NPU 还有一个独特的东西，那就是 AI CPU ，它是一个 NPU 侧的 ARM64 执行单元，可以直接访问设备内存。它作为 AI Core 的补充，用于处理那些不适合 SIMD/SIMT 内核执行的任务
+此外 NPU 还有一个独特的东西，那就是 AI CPU ，它是一个 NPU 侧的 ARM64 执行单元，可以直接访问设备内存。它作为 AI Core 的补充，用于处理那些不适合 SIMD/SIMT 内核执行的任务。
+
+NPU 的常见型号：
+
+- 310：低功耗推理
+- 910：训练 + 高端推理
+- 950PR：新的 Prefill
+- 950DT：新的 Decode + Training
+
+950 系列的分类很有趣，它并没有按照计算强度 workload 分成“Prefill + Training”与“Decode”。那么现有的分类是怎么来的呢？我觉得它其实是按照 HBM Capacity 来划分的。decode 和 training 对与 HBM 的需求更大，所以被划到了一类，950DT 的 HBM 的容量就是比 950PR 的要大。
