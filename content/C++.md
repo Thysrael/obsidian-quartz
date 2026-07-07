@@ -7,6 +7,7 @@ C++ 是人类历史上最伟大的程序语言设计思想的试验场。
 # Feature
 
 - [[C++ Namespace]]
+- [[C++ Template]]
 
 # Library
 
