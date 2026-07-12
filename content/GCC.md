@@ -66,7 +66,7 @@ usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/:/usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/
 :/lib/:/usr/lib/
 ```
 
-除此之外，GCC 还可以直接使用 `-l` 参数指定链接器链接的库，如
+除此之外，GCC 还可以直接使用 `-l` 参数指定链接器链接的库，如：
 
 ``` shell
 gcc demo.c -ldl -lpthread -lssl -lcrypto 
