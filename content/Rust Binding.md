@@ -12,7 +12,7 @@ Rust 的 `let` 语法已经在 [[Dataflow vs State]] 中详细讨论过了。
 let mut variable = 300;
 
 let a = variable;   // pass
-const b = variable; // error
+const b: i32 = variable; // error
 ```
 
 `const` 要求等号右侧的值必须要是编译期可计算的。
