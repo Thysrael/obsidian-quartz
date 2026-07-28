@@ -1,4 +1,6 @@
-出于隔离性或者虚拟化的要求，我们引入了 IOMMU 。IOMMU 可以将 IOVA 翻译成 PA ，或者将 GPA 翻译成 HPA 。IO 的页表同样在内存中维护，但是是 IOMMU 去查表。IOMMU 中不但有 IOTLB ，还有多级 Cache 用于加速对于内存中 IO 页表的访问。
+出于隔离性或者虚拟化的要求，我们引入了 IOMMU 。IOMMU 是服务于 DMA 的。
+
+IOMMU 可以将 IOVA（也就是设备虚拟地址，如果设备支持多进程就有）翻译成 PA ，或者将 GPA 翻译成 HPA 。IO 的页表同样在内存中维护，但是是 IOMMU 去查表。IOMMU 中不但有 IOTLB ，还有多级 Cache 用于加速对于内存中 IO 页表的访问。
 
 ![](img/clipboard-20241126T204327.png)
 
