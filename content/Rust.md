@@ -1,3 +1,4 @@
 - 工具链控制：[[RustUp]]
 - Rust Binding：[[Rust Binding]]
 - Rust Ownership System: [[Rust Ownership]]
+- Rust 类型系统：[[Rust Type]]
