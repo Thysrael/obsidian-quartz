@@ -19,6 +19,7 @@
 - 两阶段锁：[[2PL]]
 - 隐藏延迟：[[Shadow Latency]]
 - 尾延迟：[[Tail Latency]]
+- 集合通信：[[Collective Communication Operations]]
 
 # 分布式通信库
 
