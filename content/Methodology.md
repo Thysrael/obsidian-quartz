@@ -13,3 +13,4 @@
 # 表达
 
 - 如何讲故事：[[StoryTelling]]
+- 如何照相：[[Photography]]
