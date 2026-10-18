@@ -11,6 +11,7 @@
 - [[Norm]]
 - [[RoPE]]
 - [[KV Cache]]
+- [[Activation Functions]]
 
 # Model Family
 
