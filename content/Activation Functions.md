@@ -64,7 +64,9 @@ $$
 SiLU 其实就是 Sigmoid Linear Unit 的意思，它在线性映射的基础上，增加了一个使用 `sigmoid` 的系数：
 
 $$
-\operatorname{SiLU}(x) = \sigma(x) \odot x
+\operatorname{SiLU}(x)
+=
+\sigma(x) \odot x
 $$
 
 形状是：
